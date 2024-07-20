@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Appointment Form</title>
+    <style>
+        /* Add your CSS styles here */
+        .input {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .input1 {
+            width: 206px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .submit {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .submitted-info {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        *{
+    margin: auto;
+    padding: auto;
+}
+div.pos{
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    border-bottom: 2px solid lightgray;
+}
+#hdr{
+    width: auto;
+}
+#ha{
+    background-color: #2fa5eb;
+    padding: 10px;
+    font-weight: bold;
+    padding-right: 150px;
+    color: aliceblue;
+    text-align: right;
+}
+nav{
+    text-align: right;
+    width: 100%;
+    padding-bottom: 7px;
+    /* background-color: beige; */
+}
+#b{
+   
+    font-size: 50px;
+    font-family: forte;
+    text-align: left;
+    padding-left: 100px;
+}
+a:link{
+    text-decoration: none;
+    padding: 10px;
+    color: gray;
+}
+a:hover{
+    text-decoration-line: underline;
+    color: blue;
+}
+a:visited{
+    color: gray ;
+
+}
+a:active{
+    text-decoration-color: blue;
+    color:blue
+}
+footer{
+    background-color: #2fa5eb;
+    
+}
+#f{
+    width: 80%;
+    background-color: black;
+    color: aliceblue;
+    padding: 5px;
+    text-align: center;
+}
+
+    </style>
+</head>
+<body>
+    <div class="pos">
+        <header><p id="ha">Contact Us +9196366 20000/01 | suh@hospital.com</p></header>
+        <div id="hdr">
+        <p id="b" ><span style="color:#2fa5eb ;">SUPER</span> Hospital</p>
+        <nav >
+            <a href="{{url_for('home')}}">HOME</a>
+            <a href="{{url_for('about')}}">ABOUT US</a>
+            <a href="{{url_for('services')}}">SERVICES</a>
+            <a href="{{url_for('doctors')}}">DOCTORS</a>
+            <a href="{{url_for('contact')}}">CONTACT US</a>
+            <a href="{{url_for('appointment')}}">DASHBOARD</a>
+        </nav>
+        </div>
+    </div>
+    <main class="hm">
+        <form action="#" method="POST">
+            <h2 id="fh"style="margin-left: 500px;"> Appointment Deatils</h2>
+            <table  id='details' border="1" cellspacing="0" style="margin-left: 200px;">
+                
+               <tr style="background-color:rgb(175, 175, 244);">
+                   <th>id</th>
+                   <th>Firstname</th>
+                   <th>LastName</th>
+                   <th>Email</th>
+                   <th>Mobile</th>
+                   <th>Sex</th>
+                   <th>Appoinemnt date</th>
+                   <th>Additional Information</th>
+                   <th>Edit</th>
+                   <th>Delete</th>
+                   
+                   </tr>
+                 {% for row in data %}
+                 <tr>
+                   <td>{{ row[0] }}</td>
+                   <td>{{ row[1] }}</td>
+                   <td>{{ row[2] }}</td>
+                   <td>{{ row[3] }}</td>
+                   <td>{{ row[4] }}</td>
+                   <td>{{ row[5] }}</td>
+                   <td>{{ row[6] }}</td>
+                   <th>{{ row[7] }}</th>
+                   <td><button tpye="submit"style="color:black;"><a href="{{url_for('update',patient_id=row[0])}} ">Update</button></a></td>
+
+                   <td><button tpye="submit"style="color:black;"><a href="{{url_for('delete',patient_id=row[0])}} "onclick="fun()">Delete</button></a></td>
+
+                 </tr>
+                 {% endfor %}
+               </table>
+
+       
+
+    </main>
+</body>
+</html>
