@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+    <style>
+        .header {
+            background-color: #36bfe6;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <header>
+            <h1>Library Management System</h1>
+        </header>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin_dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/books">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/manage_members">Manage Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/manage_books">Manage Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/borrowed_books">Borrowed Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/returned_books">Returned Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main-content">
+                <div class="container mt-4">
+                    <h2>Add New Member</h2>
+                    <form id="addMemberForm" method="POST" action="{{ url_for('add_member') }}" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Member</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+    <br>
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2024 Library Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById('name').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var password = document.getElementById('password').value.trim();
+
+            if (name === '') {
+                alert('Please enter the name.');
+                return false;
+            }
+
+            if (email === '') {
+                alert('Please enter the email.');
+                return false;
+            }
+
+            // Basic email format validation using regex
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+
+            if (password === '') {
+                alert('Please enter the password.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>

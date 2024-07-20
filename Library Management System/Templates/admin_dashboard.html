@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+    <style>
+        body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+}
+
+.dashboard-box {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    /* transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; */
+    color: #fff;
+    font-size: 1.2em;
+    margin: 10px auto;
+    max-width: 200px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+}
+
+.dashboard-box:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-box.expenses {
+    background-color: #4a90e2;
+}
+
+.dashboard-box.expenses:hover {
+    background-color: #357abd;
+}
+
+.dashboard-box.budgets {
+    background-color: #50e3c2;
+}
+
+.dashboard-box.budgets:hover {
+    background-color: #3bbda6;
+}
+
+.dashboard-box.reports {
+    background-color: #7b61ff;
+}
+
+.dashboard-box.reports:hover {
+    background-color: #5a47e0;
+}
+
+.col-md-4 {
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+   
+    border-radius: 10px;
+}
+
+.col-md-4:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: #f0f4f8; /* New background color on hover */
+}
+
+.sidebar {
+            background-color: #2c3e50;
+            padding-top: 20px;
+            color: #bdc3c7;
+            position: fixed;
+            top: 79px; /* Adjusted to start below the header */
+            left: 0;
+            bottom: 0;
+            width: 200px; /* Adjust sidebar width as needed */
+            overflow-y: auto; /* Allow scrolling if content exceeds sidebar height */
+        }
+
+.sidebar .nav-link {
+    color: #bdc3c7;
+    font-size: 1.1em;
+}
+
+.sidebar .nav-link.active {
+    color: #fff;
+    background-color: #2980b9;
+    border-radius: 5px;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+h1 {
+    color: #161717;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #aaaaaa;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.header {
+    background-color: #36bfe6;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    position: sticky;
+    top:0;
+    z-index: 1;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #36bfe6;
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+        }
+
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard-box:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.dashboard-box:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dashboard-box:nth-child(3) {
+    animation-delay: 0.3s;
+}
+ 
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <header>
+            <h1>Library Management System</h1>
+        </header>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active " href="/admin_dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/books">Books</a>
+                        </li>  
+                        <li class="nav-item">
+                            <a class="nav-link " href="/manage_members">Manage Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/manage_books">Manage Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/borrowed_books">Borrowed Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/returned_books">Returned Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                       
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main-content">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="dashboard-box expenses"  >
+                            <h2>Memebers</h2>
+                           
+                            <p>{{ members_count }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="dashboard-box budgets" >
+                            <h2>Books</h2>
+                             <p>{{ books_count }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="dashboard-box budgets"  >
+                            <h2> Borrrowed </h2>
+                            <p>{{ borrowed_count }}</p>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="dashboard-box budgets"  >
+                        <h2> Returned </h2>
+                            
+                            <p>{{ returned_count }}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+<br>
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2024 Library Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!-- Store this code in 'register.html' file inside the 'templates' folder -->
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Register </title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">			 
+	</head>
+	<body><br><br><br><br><br><br>
+
+		<div align="center">
+			<div align="center" class="border">
+				<div class="header">
+					<h1 class="word">Register</h1>
+				</div><br><br><br><br>
+				<h2 class="word">
+					<form id="registerForm" action="{{ url_for('register') }}" method="post" onsubmit="return validateForm()">
+						<div class="msg">{{ msg }}</div>
+						<input id="username" name="username" type="text" placeholder="Enter Your Username"
+							class="textbox" /><br><br>
+						<input id="password" name="password" type="password" placeholder="Enter Your Password"
+							class="textbox" /><br><br>
+						<input id="email" name="email" type="text" placeholder="Enter Your Email ID" class="textbox" /><br><br>
+						<input type="submit" class="btn" value="Sign Up"><br>
+					</form>
+				</h2>
+				<p class="bottom">Already have an account? <a class="bottom" href="{{url_for('login')}}">Sign In here</a></p>
+			</div>
+		</div>
+	
+		<script>
+			function validateForm() {
+				var username = document.getElementById('username').value.trim();
+				var password = document.getElementById('password').value;
+				var email = document.getElementById('email').value.trim();
+	
+				if (username === '') {
+					alert('Please enter your username.');
+					return false;
+				}
+	
+				if (password === '') {
+					alert('Please enter your password.');
+					return false;
+				}
+	
+				if (email === '') {
+					alert('Please enter your email.');
+					return false;
+				}
+	
+				// Simple email validation using regex
+				var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				if (!emailRegex.test(email)) {
+					alert('Please enter a valid email address.');
+					return false;
+				}
+	
+				return true;
+			}
+		</script>
+	</body>

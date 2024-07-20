@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+    <style>
+        .header {
+            background-color: #36bfe6;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <header>
+            <h1>Library Management System</h1>
+        </header>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/admin_dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/books">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/manage_members">Manage Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active " href="/manage_books">Manage Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/borrowed_books">Borrowed Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/returned_books">Returned Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main-content">
+                <div class="container mt-4">
+                    <h2>Edit Member</h2>
+                    <form id="editMemberForm" action="{{ url_for('edit_member', member_id=member.member_id) }}"
+                        method="POST" onsubmit="return validateForm()">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" value="{{ member.name }}" required><br><br>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="{{ member.email }}" required><br><br>
+
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Leave blank to keep existing">
+                        <br><br>
+
+                        <input type="submit" value="Save Changes">
+                    </form>
+
+                    <a href="{{ url_for('manage_members') }}">Cancel</a>
+                </div>
+            </main>
+        </div>
+    </div>
+    <br>
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2024 Library Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById('name').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var password = document.getElementById('password').value.trim();
+
+            if (name === '') {
+                alert('Please enter the name.');
+                return false;
+            }
+
+            if (email === '') {
+                alert('Please enter the email.');
+                return false;
+            }
+
+            // You can add more specific validations for email format if needed
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>

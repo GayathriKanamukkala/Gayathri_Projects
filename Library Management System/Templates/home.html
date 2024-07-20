@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../static/index.css">
+
+  <style>
+    /* Custom styles for profile popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 25%; 
+      right: 25%; /* Adjust the distance from the right edge */
+      transform: translateY(-50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      max-width: 300px; /* Adjust width as needed */
+      max-height: 70%;
+      overflow: auto;
+    }
+    .para {
+      text-align: justify;
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="header1">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+
+            <div class="navbar-header">
+              <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse">
+                <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+              </button>
+              <a href="#" class="navbar-brand">LIBRARY</a>
+            </div>
+
+            <div class="navbar-collapse collapse" id="mobile_menu">
+              <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('user_book') }}">Books</a></li>
+               
+                <li><a href="{{ url_for('return_book') }}">Return Book</a></li>
+
+                <li><a href="{{ url_for('history', member_id=session['member_id']) }}">Borrow History</a></li>
+
+              </ul>
+              <ul class="nav navbar-nav">
+                <li>
+                    <form action="" class="navbar-form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="search" name="search" id="searchInput"
+                                    placeholder="Search by Title or Author..." class="form-control">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-search" onclick="searchBooks()"></span></span>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </li>
+            </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" id="profileLink"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-log-in"></span> Login / Sign Up /Log out<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="memberlogin">Login</a></li>
+                    <li><a href="memberregister">Sign Up</a></li>
+                    <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="home">
+    <div class="homepage">
+      <p class="para">
+        <span style="color:skyblue;font-size: 30px;">Welcome to Our Library</span>
+      </p>
+
+      <p class="para">
+        Explore a world of knowledge at [Library Name], embark on a journey through the realms of knowledge and imagination. Our shelves brim with a diverse collection of books spanning every genre and era, from timeless classics to contemporary masterpieces.
+
+        Discover a sanctuary where learning knows no bounds. Engage with our digital archives and delve into rich repositories of information, catering to both scholars and curious minds alike.
+
+        Enrich your experience with our vibrant community events, where ideas are shared, debates ignite, and creativity flourishes. From author readings to educational workshops, there’s something for everyone to explore and enjoy.
+      </p>
+    </div>
+
+    <div class="homepage">
+      <img src="../static/images/img1.jpg" class="img1">
+    </div>
+  </div>
+
+  <div width="90%">
+    <p style="font-size: 20px;margin-left:100px;">
+      Whether you’re seeking inspiration, seeking answers, or simply seeking solace in the pages of a good book, [Library Name] invites you to embrace the joy of discovery. Join us and let your imagination take flight in the boundless world of words and ideas.
+    </p>
+  </div>
+ 
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-icons">
+        <!-- Social media icons -->
+        <a href="#" class="fab fa-facebook-f"  style="background-color: #3b5998;"></a>
+        <a href="#" class="fab fa-twitter" style="background-color: #55acee;"></a>
+        <a href="#" class="fab fa-google" style="background-color: #dd4b39;" ></a>
+        <a href="#" class="fab fa-instagram"  style="background-color: #ac2bac;"></a>
+        <a href="#" class="fab fa-linkedin-in" style="background-color: #0082ca;"></a>
+        <a href="#" class="fab fa-github" style="background-color: #333333;"></a>
+      </div>
+      <p>&copy; 2020 Copyright: <span style="color: rgba(103, 201, 12, 0.692);">Library Management</span></p>
+    </div>
+  </footer>
+
+  <!-- Profile Popup -->
+  <div id="profilePopup" class="popup">
+    <h2> Profile</h2>
+    
+    <form action="{{ url_for('edit_member', member_id=member.member_id) }}" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="{{member.name}}" ><br><br>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="{{member.email}}" required><br><br>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Leave blank to keep existing"><br><br>
+      
+      <input type="submit" value="Save Changes">
+    </form>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- JavaScript for Popup Interaction -->
+  <script>
+    // Function to show the popup
+    function showPopup() {
+      document.getElementById('profilePopup').style.display = 'block';
+    }
+  
+    // Function to close the popup
+    function closePopup() {
+      document.getElementById('profilePopup').style.display = 'none';
+    }
+  
+    // Event listener to show popup on clicking profile link
+    document.getElementById('profileLink').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      showPopup(); // Call showPopup function
+    });
+
+    // Search functionality
+    var bookItems = document.querySelectorAll('.book-item');
+
+    function searchBooks() {
+      var searchText = document.getElementById('searchInput').value.toLowerCase().trim();
+
+      bookItems.forEach(function (item) {
+        var title = item.getAttribute('data-title').toLowerCase();
+        var author = item.getAttribute('data-author').toLowerCase();
+
+        if (title.includes(searchText) || author.includes(searchText)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+ 
+// JavaScript for Search Functionality
+
+// Function to filter books based on search criteria
+function searchBooks() {
+  var searchText = document.getElementById('searchInput').value.trim();
+
+  // Redirect to books page with search query
+  window.location.href = "{{ url_for('user_book') }}?search=" + encodeURIComponent(searchText);
+}
+
+
+
+  // Execute on page load
+ 
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+    <style>
+        .header {
+            background-color: #36bfe6;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .card {
+            width: 300px;
+        }
+
+        .card-img-top {
+            width: 200px;
+            height: 200px;
+            margin: 5px;
+        }
+
+        .filter-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 70%;
+            background-color: #fff;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .filter-popup-content {
+            margin-top: 20px;
+        }
+
+        .close-filter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .filter-button-container {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <header>
+            <h1>Library Management System</h1>
+        </header>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin_dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/books">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/manage_members">Manage Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/manage_books">Manage Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/borrowed_books">Borrowed Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/returned_books">Returned Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 main-content">
+                <div class="book">
+                    <div class="filter-button-container">
+                        <button class="btn btn-primary mb-3" id="openFilter">Filter Books</button> 
+                         <button type="button" class="btn btn-primary mb-3" onclick="resetFilters()">Reset</button>
+                    </div>
+
+                    <div class="filter-popup" id="filterPopup">
+                        <div class="filter-popup-content">
+                            <span class="close-filter" onclick="closeFilterPopup()">&times;</span>
+                            <h3>Filter Options</h3>
+                            <form id="filterForm">
+                                <div class="form-group">
+                                    <label for="titleFilter">Title:</label>
+                                    <input type="text" class="form-control" id="titleFilter">
+                                </div>
+                                <div class="form-group">
+                                    <label for="authorFilter">Author:</label>
+                                    <input type="text" class="form-control" id="authorFilter">
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoryFilter">Category:</label>
+                                    <select class="form-control" id="categoryFilter">
+                                        <option value="">All Categories</option>
+                                        <option value="Fiction">Fiction</option>
+                                        <option value="Non-Fiction">Non-Fiction</option>
+                                        <option value="Math">Math</option>
+                                        <option value="History">History</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="applyFilters()">Apply</button>
+                              
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Book Cards -->
+                    {% for b in book %}
+                    <div class="col-md-3 mb-3 book-item" data-title="{{ b.title | lower }}" data-author="{{ b.author | lower }}" data-category="{{ b.category | lower }}">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ url_for('static', filename='uploads/' + b.file) }}" alt="Book Image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ b.title }}</h5>
+                                <p class="card-text">Author: {{ b.author }}</p>
+                                <p class="card-text">Category: {{ b.category }}</p>
+                                <p class="card-text">Availability: {% if b.availability %} Available {% else %} Not Available {% endif %}</p>
+                                <a href="{{ url_for('view_book', book_id=b.book_id) }}" class="btn btn-primary">View</a>
+                                <a href="{{ url_for('edit_book', book_id=b.book_id) }}" class="btn btn-secondary">Edit</a>
+                                <form action="{{ url_for('delete_book', book_id=b.book_id) }}" method="post" style="display: inline-block;">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2024 Library Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Filter Popup -->
+    <script>
+        var filterPopup = document.getElementById('filterPopup');
+        var openFilterButton = document.getElementById('openFilter');
+
+        openFilterButton.addEventListener('click', function () {
+            filterPopup.style.display = 'block';
+        });
+
+        function closeFilterPopup() {
+            filterPopup.style.display = 'none';
+        }
+
+        function applyFilters() {
+            var titleFilter = document.getElementById('titleFilter').value.toLowerCase().trim();
+            var authorFilter = document.getElementById('authorFilter').value.toLowerCase().trim();
+            var categoryFilter = document.getElementById('categoryFilter').value.toLowerCase().trim();
+            var bookItems = document.querySelectorAll('.book-item');
+
+            bookItems.forEach(function (item) {
+                var title = item.getAttribute('data-title').toLowerCase();
+                var author = item.getAttribute('data-author').toLowerCase();
+                var category = item.getAttribute('data-category').toLowerCase();
+
+                var titleMatch = title.includes(titleFilter);
+                var authorMatch = author.includes(authorFilter);
+                var categoryMatch = categoryFilter === '' || category.includes(categoryFilter);
+
+                if (titleMatch && authorMatch && categoryMatch) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            closeFilterPopup();
+        }
+
+        function resetFilters() {
+            document.getElementById('titleFilter').value = '';
+            document.getElementById('authorFilter').value = '';
+            document.getElementById('categoryFilter').value = '';
+
+            var bookItems = document.querySelectorAll('.book-item');
+            bookItems.forEach(function (item) {
+                item.style.display = 'block';
+            });
+
+            closeFilterPopup();
+        }
+    </script>
+</body>
+
+</html>

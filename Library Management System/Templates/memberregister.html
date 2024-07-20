@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/index.css">
+    
+    <style>
+      
+    </style>
+</head>
+<body class="background">
+    <div>
+    <div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <a href="#" class="navbar-brand">LIBRARY</a>
+                    </div>
+
+                  
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span class="caret"></span></a>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                      ><span class="glyphicon glyphicon-log-in"></span> Login /
+                                      Sign Up/Log out <span class="caret"></span
+                                    ></a>
+                                    <ul class="dropdown-menu">
+                                      <li><a href="{{ url_for('memberlogin') }}">Login</a></li>
+                                      <li>
+                                        <a href="{{ url_for('memberregister') }}">Sign Up</a>
+                                        <li>
+                                          <a href="{{ url_for('logout') }}">Log out</a>
+                                        </li>
+                                      </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div align="center">
+		<div align="center" class="border">
+			<div class="header">
+				<h1 class="word">Register</h1>
+			</div></br></br></br>
+			<h2 class="word">
+				<form action="{{ url_for('memberregister') }}" method="post">
+				<div class="msg">{{ msg }}
+					<input id="name" name="name" type="text" placeholder="Enter Your name" class="textbox"/></br></br>
+					<input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/></br></br>
+					<input id="email" name="email" type="text" placeholder="Enter Your Email ID" class="textbox"/></br></br>
+					<input type="submit" class="btn" value="Sign Up"></br>
+				</form>
+			</h2>
+			<p class="bottom">Already have an account? <a class="bottom" href="{{url_for('memberlogin')}}"> Sign In here</a></p>
+		</div>
+		</div>
+   
+</div>
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
