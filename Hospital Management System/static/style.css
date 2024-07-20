@@ -1,0 +1,165 @@
+
+/* _______ Styles for Header and footer __________ */
+*{
+    margin: auto;
+    padding: auto;
+}
+div.pos{
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    border-bottom: 2px solid lightgray;
+}
+#hdr{
+    width: auto;
+}
+#ha{
+    background-color: #2fa5eb;
+    padding: 10px;
+    font-weight: bold;
+    padding-right: 150px;
+    color: aliceblue;
+    text-align: right;
+}
+nav{
+    text-align: right;
+    width: 75%;
+    padding-bottom: 7px;
+    
+}
+#b{
+   
+    font-size: 50px;
+    font-family: forte;
+    text-align: left;
+    padding-left: 100px;
+}
+a:link{
+    text-decoration: none;
+    padding: 10px;
+    color: gray;
+}
+a:hover{
+    text-decoration-line: underline;
+    color: blue;
+}
+a:visited{
+    color: gray ;
+
+}
+a:active{
+    text-decoration-color: blue;
+    color:blue
+}
+footer{
+    background-color: #2fa5eb;
+    
+}
+#f{
+    width: 80%;
+    background-color: black;
+    color: aliceblue;
+    padding: 5px;
+    text-align: center;
+}
+
+/* ___________ Styles applying for home page _____________ */
+#dhm{
+    border-bottom: 2px solid lightgray;
+    
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.hm{/* home page main */
+    padding-top: 0px ;
+    width : 75%;
+    width: 80%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-bottom: 0px;
+}
+#img{
+    width: 1000px;
+    background-image: url("../static/images/a.jpg");
+    height:400px;
+    padding-bottom: 0px;
+    
+}
+#opt{ /*for opacity */
+    background-color: black;
+    color: aliceblue;
+    opacity: 0.2;
+    width: 70%;
+  
+    
+}
+#h3{
+    font-size: 30px;
+}
+.para{
+    width: 65%;
+    margin-left: 0;
+}
+#fh{
+    font-size: 50px;
+    font-family: forte;
+    text-align: center;
+    
+}
+.input{
+    padding: 10px;
+    width: 200px;
+}
+.input1{
+    padding: 10px;
+    width: 230px;
+}
+.submit{
+    padding: 5px;
+    width: 500px;
+    color: aliceblue;
+    background-color: #2fa5eb;
+}
+
+    /*________ styles for about page ________*/
+
+.about{
+    width: 87%;
+    margin: 0 auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#p{
+    color: gray;
+}
+
+/* ___________ styeles for services page ___________ */
+
+.srvs{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 87%;
+    margin: 0 auto;
+}
+.s1{
+    display: inline-block;
+    width:48%;
+}
+ #s1{
+    text-align: left;
+} 
+#ps{
+    font-size: 30px;
+}
+.d{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 87%;
+    margin: 0 auto;
+}
+#pd{
+    font-size: 25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.c{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 87%;
+    margin: 0 auto;
+}
