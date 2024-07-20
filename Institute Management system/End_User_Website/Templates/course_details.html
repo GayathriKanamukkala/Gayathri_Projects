@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../static/index.css" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    .course-details {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .course-details .course-details-card {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .course-details .course-details-card .details {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 20px;
+      padding-top: 0%;
+      border-radius: 10px;
+    }
+
+    .course-details .check {
+      color: greenyellow;
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+    }
+
+    .feature-box {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .feature-box img {
+      margin-bottom: 10px;
+    }
+
+    .tech-icon {
+      max-width: 100px;
+      max-height: 100px;
+      margin-bottom: 10px;
+    }
+
+    .tech-box {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .carousel-item img {
+      max-height: 100px;
+      object-fit: cover;
+    }
+
+    .carousel-inner {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .carousel-item {
+      flex: 1 0 19%;
+      /* Show 5 items at a time */
+    }
+
+    .table-header {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .table .highlight {
+      color: red;
+    }
+
+    .btn-pink {
+      background-color: #ff007f;
+      color: white;
+    }
+
+    .curriculum-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    /* curriculum */
+    .gunmetal-container{
+      background-color: white;
+    }
+        .topic {
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        .sub_topics {
+            display: none;
+            margin-left: 20px;
+            margin-top: 10px;
+            border-left: 2px solid #007BFF;
+            padding-left: 10px;
+        }
+        .topic:hover {
+            background-color: #e9e9e9;
+        }
+        .active .sub_topics {
+            display: block;
+        }
+        .sel{
+          background-color: #b9aab1;
+          width: 75%;
+          margin: auto;
+          border: 1px solid blueviolet;
+        }
+
+        
+  </style>
+  <script>
+    function toggleSubTopics(topicId) {
+      // alert("hi")
+        var element = document.getElementById('topic_' + topicId);
+        // alert(element)
+        element.classList.toggle('active');
+    }
+</script>
+</head>
+
+<body>
+  <div class="gunmetal-container">
+    <div style="padding-top: 100px;">
+      <!-- header -->
+      <div style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            position: fixed; top: 0; width: 100%;
+            background-color:  #182554;
+            z-index: 9999;
+          " class="navlinks">
+         <a href="{{url_for('index')}}" class="links">
+          <img src="../static/images/logoooo-removebg-preview.png" style="height: 100px;width:170px;">
+          <span style="color: greenyellow ; font-size: 40px;" > Vertex Institute</span>
+        </a>
+        <nav style="color: rgb(219, 219, 219); display: flex; flex-direction: row; gap: 30px; font-size: 20px;">
+          <!-- logo -->
+          <a href="{{url_for('courses')}}" class="links">Courses</a>
+          <a href="{{url_for('ourTeam')}}" class="links">Our team</a>
+          <a href="{{url_for('gallery')}}" class="links">Gallery</a>
+          <a href="{{url_for('contactUs')}}" class="links">Contact Us</a>        </nav>
+      </div>
+      <!-- header -->
+
+      <div class="course-details">
+        <div class="course-details-card">
+          <h2 style="color:rgb(10, 10, 10) ; text-align: center; padding: 40px;">{{ course.course_name }} -- Online Overview
+          </h2>
+          <div class="details">
+            <div style="width: 50%;">
+              <img style="width: 100%;"
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="std" />
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- need to add description -->
+    </div>
+    <!-- description -->
+     <div class="container" style="color:black">
+      <p> {{course.course_description }} </p>
+     </div>
+    <div class="container" style="color: black; padding: 40px; margin-left: 140px;">
+      <h3>Who can adopt {{course.course_name}} as their Career?</h3>
+      <p>{{ course.pre_requisites }}.</p>
+    </div>
+  </div>
+  <!-- Course curriculam -->
+  <div class="sel">
+    <div class="container  zero" >
+      <div class="curriculum">
+        <h2 class="curriculum-title">{{ course.course_name }} -- Course Curriculum</h2>
+        {% for topic in topics %}
+        <div id="topic_{{ topic.topic_id }}" class="topic" onclick="toggleSubTopics('{{ topic.topic_id }}')">
+          <strong>{{ topic.topic_name }}</strong>
+          <div class="sub_topics">
+            {% for sub_topic in topic.sub_topics %}
+            <div>{{ sub_topic.subtopic_name }}</div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!-- Training Program Schedule -->
+  <div class="container mt-5">
+    <div class="mb-5">
+      <h2 style="color: rgba(214, 36, 146, 0.815);">Training Program Schedule</h2>
+      <table  class="table table-bordered tab">
+        <thead>
+          <tr class="table-header">
+            <th>Duration Of Course</th>
+            <td>{{ course.course_duration }}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Training Methods</th>
+            <td>{{ course.training_methods }}</td>
+          </tr>
+          <tr>
+            <th>Timings</th>
+            <td>{{ course.timings }}</td>
+          </tr>
+          <tr>
+            <th>Next Batch start date</th>
+            <td>{{ course.batch_start_date }}
+            </td>
+          </tr>
+          <tr>
+            <th>For more information</th>
+            <td>Call or send a WhatsApp message to 7569456398.</td>
+          </tr>
+        </tbody>
+      </table>
+      <tr>
+        <td colspan="2">
+          <!-- <a href="{{url_for('enrollment_form')}}"><input type="submit" value="Enroll Now" 1style="margin-left:450px; width: 200px;"></a> -->
+          <form action="{{url_for('enrollment_form')}}" method="post">
+            <input type="hidden" name="course_id" value="{{course.course_id}}" >
+            <input type="hidden" name="course_name" value="{{course.course_name}}" >
+            <a href="{{url_for('enrollment_form')}}"><input type="submit" value="Enroll today" style="margin-left: 480px; width: 150px; background-color: #095f40; color:white ; font-size: 22px;"></a>
+          </form>
+        </td>
+        
+      </tr>
+    </div>
+  </div>
+  <!-- Static code no need to change -->
+  <div class="container mt-5">
+    <h2 class="text-center tab" style="color: rgba(214, 36, 36, 0.815);">Why Choose Vertex Software?</h2>
+    <div class="row mt-4">
+      <div class="col-md-4 feature-box ">
+        <img src="https://www.aestheticdigital.in/wp-content/themes/Aesthetic%20Digital/assets/img/support.png "
+          alt="Placement Icon" class="feature-icon">
+        <h5 class="tab">100% Placement Assurance With Life Long Career Support</h5>
+      </div>
+      <div class="col-md-4 feature-box">
+        <img src="https://www.aestheticdigital.in/wp-content/themes/Aesthetic%20Digital/assets/img/trainer.png "
+          alt="Trainers Icon" class="feature-icon">
+        <h5 class="tab">Highly Skillful Trainers</h5>
+      </div>
+      <div class="col-md-4 feature-box">
+        <img src="https://www.aestheticdigital.in/wp-content/themes/Aesthetic%20Digital/assets/img/modules.png "
+          alt="Modules Icon" class="feature-icon">
+        <h5 class="tab">Advanced Training Modules</h5>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-4 feature-box">
+        <img src="https://www.aestheticdigital.in/wp-content/themes/Aesthetic%20Digital/assets/img/parcticals.png "
+          alt="Training Icon" class="feature-icon">
+        <h5 class="tab">Practical Training Sessions</h5>
+      </div>
+      <div class="col-md-4 feature-box">
+        <img src="https://www.aestheticdigital.in/wp-content/themes/Aesthetic%20Digital/assets/img/projects.png "
+          alt="Internship Icon" class="feature-icon">
+        <h5 class="tab">Internship On Live Projects</h5>
+      </div>
+      <div class="col-md-4 feature-box">
+        <img src="https://www.aestheticdigital.in/wp-content/themes/Aesthetic%20Digital/assets/img/certifications.png "
+          alt="Certifications Icon" class="feature-icon">
+        <h5 class="tab">Global Certifications</h5>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="container mt-5">
+    <h2 class="text-center tab" style="color: rgba(214, 36, 36, 0.815);">Tools and Technologies</h2>
+    <img src="https://www.aestheticdigital.in/wp-content/uploads/2024/05/mean-stack-tools.jpg" alt="">
+  </div>
+
+  <footer class="bg-body-tertiary text-center" style="background-color:#182554 ; color: white; padding-top: px; ">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a
+        data-mdb-ripple-init
+          class="btn text-white btn-floating m-1"
+          style="background-color: #3b5998;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+  
+        <!-- Twitter -->
+        <a
+          data-mdb-ripple-init
+          class="btn text-white btn-floating m-1"
+          style="background-color: #55acee;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-twitter"></i
+        ></a>
+  
+        <!-- Google -->
+        <a
+          data-mdb-ripple-init
+          class="btn text-white btn-floating m-1"
+          style="background-color: #dd4b39;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-google"></i
+        ></a>
+  
+        <!-- Instagram -->
+        <a
+          data-mdb-ripple-init
+          class="btn text-white btn-floating m-1"
+          style="background-color: #ac2bac;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-instagram"></i
+        ></a>
+  
+        <!-- Linkedin -->
+        <a
+          data-mdb-ripple-init
+          class="btn text-white btn-floating m-1"
+          style="background-color: #0082ca;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+        <!-- Github -->
+        <a
+          data-mdb-ripple-init
+          class="btn text-white btn-floating m-1"
+          style="background-color: #333333;"
+          href="#!"
+          role="button"
+          ><i class="fab fa-github"></i
+        ></a>
+        <P style="padding-top: 15px;">  © 2020 Copyright:
+            <span style="color: rgba(103, 201, 12, 0.692);"> VERTEX SOLUTIONS </span></a></P>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <!-- <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.05); margin-left: 100px;">
+      © 2020 Copyright:
+      <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div> -->
+    <!-- Copyright -->
+  </footer>
+  
+    
+
+  
+</body>
+
+
+</html>

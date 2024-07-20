@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>index</title>
+    <link rel="stylesheet" href="../static/index.css" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      .gunmetal-container {
+  /* background:#97a9ce; */
+  background-color: white;
+}
+    </style>
+  </head>
+
+  <body>
+    <div class="gunmetal-container">
+      <div style="padding-top: 150px">
+        <!-- header -->
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #182554;
+            z-index: 9999;
+          "
+          class="navlinks"
+        >
+          <a href="{{url_for('index')}}" class="links">
+            <img
+              src="../static/images/logoooo-removebg-preview.png"
+              style="height: 100px; width: 170px"
+            />
+            <span style="color: greenyellow; font-size: 40px">
+              Vertex Institute</span
+            >
+          </a>
+          <nav
+            style="
+              color: rgb(219, 219, 219);
+              display: flex;
+              flex-direction: row;
+              gap: 30px;
+              font-size: 20px;
+            "
+          >
+            <!-- logo -->
+            <a href="{{url_for('courses')}}" class="links">Courses</a>
+            <a href="{{url_for('ourTeam')}}" class="links">Our team</a>
+            <a href="{{url_for('gallery')}}" class="links">Gallery</a>
+            <a href="{{url_for('contactUs')}}" class="links">Contact Us</a>
+          </nav>
+        </div>
+        <!-- header -->
+      </div>
+    <!-- </div> -->
+    <div
+      style="
+        color: white;
+        display: flex;
+        align-items: center;
+        padding-bottom: 80px;
+        width: 100%;
+        /* border: 2px solid red; */
+        /* background-color: #97a9ce; */
+        background-color: white;
+      "
+    >
+      <div  >
+        <div style="display:flex; align-items: center;">
+ 
+
+          <div class="main-heading" style="min-width: 50%; padding: 0 20px;color: #54a33c;">
+            Become An Outstanding Web Developer
+            <div style="padding-top: 30px;" >
+              <p style="color: black; font-size: 20px;">Vertex Solutions was established in 2014 and is one of the leading training institutes for Digital Marketing and Programming languages in Hyderabad. Vertex Solutions is managed by highly experienced industry experts. </p>
+            </div>
+          </div>
+          
+          <div class="min-width:50%;">
+            <img
+              style="
+                width: 100%;
+                object-fit: cover;
+                border-top-left-radius: 20px;
+                border-bottom-left-radius: 10px;
+              "
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="hero-image"
+            />
+          </div>
+          
+        </div>
+        <div style="padding-top: 10px;" >
+        <p style="font-size: larger; color: black; padding: 0 20px">
+          Emergence Of Digital Careers:
+In the contemporary business world, the word “Digital” has gained a lot of importance. There are many businesses which only run on Digital basis. With the emergence of the Internet the business has started generating high revenues. Most of the global and regional businesses have chosen the Digital Platforms to grow their businesses. Through the Digital Platforms, the businesses were able to establish a good relationship with their customers by understanding their needs and communicating with them directly. Nowadays, the presence of business over online is mandatory in order to sustain in the current competition.
+        </p>
+        <p style="font-size: larger; color: black; padding: 0 20px">
+          The massive increase in adoption of Digital platforms by many businesses around the world has created a lot of employment opportunities to the people all over the world. There is a boom in digital careers. There is a lot of demand for digital careers around the world, and the demand for digital careers continues to grow as the number of businesses increasing rapidly around the world.
+        </p>
+      </div>
+      </div>
+    </div>
+
+    <div
+      class="teal-blue-container"
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3px 60px;
+        color: white;
+      "
+    >
+      <div>
+        <p class="section-heading">
+          <span style="color: greenyellow">Certify</span> Your Learning
+        </p>
+        <p class="section-description">
+          Get a certificate upon successful completion of the program
+        </p>
+      </div>
+      <div style="padding: 30px; width: 50%">
+        <img
+          style="width: 100%; object-fit: cover; border-radius: 20px"
+          src="https://cc.sj-cdn.net/instructor/8hl21nyq8wmf-camunda/courses/1owrmoeqyg4hc/promo-image.1708356129.png"
+          alt="hero-image"
+        />
+      </div>
+    </div>
+
+    <!-- <div class="gunmetal-container" style="
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 40px;
+">
+</div> -->
+
+    <div
+      class="gunmetal-container"
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 60px 40px;
+        color: white;
+        background-color: white;
+      "
+    >
+      <div>
+        <p class="section-heading" style="color: #54a33c;">Frequently Asked Questions</p>
+        <p class="section-description1">
+          Get a fast answer to the most common service or training related questions that we receive.
+        </p>
+      </div>
+      <div style="padding: 30px; width: 50%">
+        <button class="accordion">Is the course theoretical or practical?</button>
+        <div class="panel">
+          <p style="color: #182554;">
+            Our training will be a combination of theoretical and practical on each topic.
+             We also provide live exposure on projects and give assignments to test your skill sets.
+          </p>
+        </div>
+
+        <button class="accordion">
+          Is your company providing Data Science Course?
+        </button>
+        <div class="panel">
+          <p style="color: #182554;">
+            Thank you for your interest in our educational offerings. We are
+            pleased to inform you that we do provide a comprehensive Data
+            Scientist course. Our course covers a wide range of topics,
+            including statistical analysis, machine learning, data
+            visualization, and more. For more details please visit our website
+            or contact our customer service team.
+          </p>
+        </div>
+
+        <button class="accordion">
+          Do you provide placement assistance?
+        </button>
+        <div class="panel">
+          <p style="color: #182554;">
+            Yes, we are one of the oldest & trusted software training institute in Bhubaneswar 
+            and will help with genuine placement assistance in good companies.
+             We will provide you reference only to Bhubaneswar location software companies. 
+            Based on your performance you can get a job.
+          </p>
+        </div>
+      </div>
+    </div>
+</div>
+    <footer
+      class="bg-body-tertiary text-center"
+      style="background-color: #182554; color: white; padding-top: px"
+    >
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #3b5998"
+            href="#!"
+            role="button"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+
+          <!-- Twitter -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #55acee"
+            href="#!"
+            role="button"
+            ><i class="fab fa-twitter"></i
+          ></a>
+
+          <!-- Google -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #dd4b39"
+            href="#!"
+            role="button"
+            ><i class="fab fa-google"></i
+          ></a>
+
+          <!-- Instagram -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #ac2bac"
+            href="#!"
+            role="button"
+            ><i class="fab fa-instagram"></i
+          ></a>
+
+          <!-- Linkedin -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #0082ca"
+            href="#!"
+            role="button"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <!-- Github -->
+          <a
+            data-mdb-ripple-init
+            class="btn text-white btn-floating m-1"
+            style="background-color: #333333"
+            href="#!"
+            role="button"
+            ><i class="fab fa-github"></i
+          ></a>
+          <p style="padding-top: 15px">
+            © 2020 Copyright:
+            <a class="text-body" href="https://mdbootstrap.com/">
+              <span style="color: rgba(103, 201, 12, 0.692)">
+                VERTEX SOLUTIONS</span
+              ></a
+            >
+          </p>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <!-- <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.05); margin-left: 100px;">
+    © 2020 Copyright:
+    <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div> -->
+      <!-- Copyright -->
+    </footer>
+  </body>
+
+  <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        var accordion = document.getElementsByClassName("accordion");
+        // for (let j = 0; j < accordion.length; j++) {
+        //   var panel = acc[j].nextElementSibling;
+        //   panel.style.display = "none";
+        // }
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+  </script>
+</html>
