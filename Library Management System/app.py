@@ -15,7 +15,7 @@ try:
         host='localhost',
         user='root',
         password='Gayathri@12345',
-        database='Library'
+        database='Librarys'
     )
     cursor = conn.cursor(dictionary=True)  # Use dictionary cursor for easier data retrieval
 except mysql.connector.Error as e:
